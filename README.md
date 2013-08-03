@@ -36,7 +36,7 @@ grunt.loadNpmTasks('grunt-expand-include');
 
 - `directiveSyntax`: (default `js`) either the name of a pre-defined directive syntax (`js` or `xml`)
    or alternatively defining a new syntax from scratch. The pre-defined syntax are:
- 
+
        ```js
        directiveSyntax: {
            /*  style:   valid JavaScript (JS)  */
@@ -163,6 +163,7 @@ grunt.initConfig({
 ```
 
 - `package.json`:
+
 ```json
 {
     "version": "0.9.0",
