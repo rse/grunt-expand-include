@@ -37,6 +37,7 @@ grunt.loadNpmTasks('grunt-expand-include');
 - `directiveSyntax`: (default `js`) either the name of a pre-defined directive syntax (`js` or `xml`)
    or alternatively defining a new syntax from scratch. The pre-defined syntax are:
  
+       ```js
        directiveSyntax: {
            /*  style:   valid JavaScript (JS)  */
            /*  header:  // foo  */
@@ -58,6 +59,7 @@ grunt.loadNpmTasks('grunt-expand-include');
             expand:  /\&([a-zA-Z][a-zA-Z0-9_-]*);/g,
             header:  /^<!--[^!](?:[\r\n]|.)*?-->\r?\n/
        }
+       ```
 
 - `onUndefinedVariable`: (default `keep`) action in case of a variable expansion where
   the variable is not defined: `keep` for keeping the directive as-is, `empty` for
@@ -138,8 +140,8 @@ Assuming we have the following build environment:
 
 - `Grundfile.js`:
 
-```json
-[...]
+```js
+// [...]
 grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
     "expand-include": {
@@ -157,7 +159,7 @@ grunt.initConfig({
         }
     }
 });
-[...]
+// [...]
 ```
 
 - `package.json`:
