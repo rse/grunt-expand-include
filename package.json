@@ -1,0 +1,36 @@
+{
+    "name":        "grunt-expand-include",
+    "homepage":    "http://github.com/rse/grunt-expand-include",
+    "description": "Grunt Task for Expanding Include Directives",
+    "version":     "0.9.0",
+    "license":     "MIT",
+    "author": {
+        "name":    "Ralf S. Engelschall",
+        "email":   "rse@engelschall.com",
+        "url":     "http://engelschall.com"
+    },
+    "keywords": [
+        "gruntplugin",
+        "expand", "include"
+    ],
+    "repository": {
+        "type": "git",
+        "url":  "git://github.com/rse/grunt-expand-include.git"
+    },
+    "bugs": {
+        "url":  "http://github.com/rse/grunt-expand-include/issues"
+    },
+    "main": "Gruntfile.js",
+    "devDependencies": {
+        "grunt":                "~0.4.1",
+        "grunt-cli":            "~0.1.9",
+        "grunt-contrib-jshint": "~0.4.3",
+        "grunt-contrib-clean":  "~0.4.1"
+    },
+    "peerDependencies": {
+        "grunt":                "~0.4.1"
+    },
+    "engines": {
+        "node":                 ">=0.10.0"
+    }
+}
