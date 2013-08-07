@@ -29,7 +29,7 @@ Once the plugin has been installed, it may be enabled inside your
 Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-expand-include');
+grunt.loadNpmTasks("grunt-expand-include");
 ```
 
 ## Task Options
@@ -149,7 +149,7 @@ grunt.initConfig({
             src: [ "src/foo-lib.js" ],
             dest: "build/foo.js",
             options: {
-                directiveSyntax: "js
+                directiveSyntax: "js",
                 globalDefines: {
                     major: "<%= pkg.version.split('.')[0] %>",
                     minor: "<%= pkg.version.split('.')[1] %>",
