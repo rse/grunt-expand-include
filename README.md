@@ -39,23 +39,22 @@ grunt.loadNpmTasks("grunt-expand-include");
 
        ```js
        directiveSyntax: {
-           /*  style:   valid JavaScript (JS)  */
-           /*  header:  // foo  */
-           /*  include: $include("foo", { bar: "quux", baz: "quux" })  */
-           /*  expand:  $bar  */
-           include: /([ \t]*)include\(\s*"([^"]+)"\s*(?:,\s*(\{(?:[\r\n]|.)*?\}))?\s*\)([ \t]*(\r?\n)?)/g,
-           define:  /\s*"?([a-zA-Z][a-zA-Z0-9_-]*)"?\s*:\s*"([^"]*)"\s*/g,
-           expand:  /\$([a-zA-Z][a-zA-Z0-9_-]*)/g,
-           header:  /^(?:\/\*[^!](?:[\r\n]|.)*?\*\/|(?:\/\/[^\r\n]*\r?\n)*)\r?\n/
+            /*  style:   valid JavaScript (JS)  */
+            /*  header:  // foo  */
+            /*  include: include("foo", { bar: "quux", baz: "quux" })  */
+            /*  expand:  $bar  */
+            include: /([ \t]*)include\(\s*(["'])((?:\\\2|(?!\2).)+)\2\s*(?:,\s*(\{(?:[\r\n]|.)*?\}))?\s*\)([ \t]*(\r?\n)?)/g,
+            define:  /\s*(["']?)([a-zA-Z][a-zA-Z0-9_-]*)\1\s*:\s*(["'])((?:\\\3|(?!\3).)*)\3\s*/g,
+            expand:  /\$([a-zA-Z][a-zA-Z0-9_-]*)/g,
+            header:  /^(?:\/\*[^!](?:[\r\n]|.)*?\*\/|(?:\/\/[^\r\n]*\r?\n)*)\r?\n/
        }
-
        directiveSyntax: {
             /*  style:   valid eXtensible Markup Language (XML)  */
             /*  header:  <!-- foo -->  */
             /*  include: <include file="foo" bar="quux" baz="quux"/>  */
             /*  expand:  &bar;  */
-            include: /([ \t]*)<include\s+file="([^"]+)"((?:\s*[a-zA-Z][a-zA-Z0-9_-]*="[^"]*")*)\s*\/>([ \t]*(\r?\n)?)/g,
-            define:  /\s*([a-zA-Z][a-zA-Z0-9_-]*)="([^"]*)"\s*/g,
+            include: /([ \t]*)<include\s+file=(["'])((?:\\\2|(?!\2).)+)\2((?:\s*[a-zA-Z][a-zA-Z0-9_-]*=(["'])(?:\\\5|(?!\5).)*\5)*)\s*\/>([ \t]*(\r?\n)?)/g,
+            define:  /\s*()([a-zA-Z][a-zA-Z0-9_-]*)=(["'])((?:\\\3|(?!\3).)*)\3\s*/g,
             expand:  /\&([a-zA-Z][a-zA-Z0-9_-]*);/g,
             header:  /^<!--[^!](?:[\r\n]|.)*?-->\r?\n/
        }
