@@ -92,6 +92,9 @@ module.exports = function (grunt) {
 
             /*  expand includes  */
             txt = txt.replace(options.directiveSyntax.include, function (directive, prolog, _q, file, definitions, epilog) {
+                /*  resolve possibly existing escapes  */
+                file = file.replace(new RegExp("\\\\" + _q, "g"), _q);
+
                 /*  process file  */
                 if (!grunt.file.isPathAbsolute(file))
                     file = path.resolve(path.join(basedir, file));
@@ -108,6 +111,12 @@ module.exports = function (grunt) {
                 var include_defines = defines;
                 if (typeof definitions !== "undefined" && definitions !== "") {
                     definitions.replace(options.directiveSyntax.define, function (define, _q1, name, _q2, value) {
+                        /*  resolve possibly existing escapes  */
+                        if (typeof _q1 !== "undefined" && _q1 !== "")
+                            value = value.replace(new RegExp("\\\\" + _q1, "g"), _q1);
+                        value = value.replace(new RegExp("\\\\" + _q2, "g"), _q2);
+
+                        /*  store definition  */
                         include_defines[name] = value;
                     });
                 }
