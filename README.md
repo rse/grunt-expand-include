@@ -41,9 +41,9 @@ grunt.loadNpmTasks("grunt-expand-include");
        directiveSyntax: {
             /*  style:   valid JavaScript (JS)  */
             /*  header:  // foo  */
-            /*  include: include("foo", { bar: "quux", baz: "quux" })  */
+            /*  include: include("foo", { bar: "quux", baz: "quux" });  */
             /*  expand:  $bar  */
-            include: /([ \t]*)include\(\s*(["'])((?:\\\2|(?!\2).)+)\2\s*(?:,\s*(\{(?:[\r\n]|.)*?\}))?\s*\)([ \t]*(\r?\n)?)/g,
+            include: /([ \t]*)include\(\s*(["'])((?:\\\2|(?!\2).)+)\2\s*(?:,\s*(\{(?:[\r\n]|.)*?\}))?\s*\)\s*;?([ \t]*(\r?\n)?)/g,
             define:  /\s*(["']?)([a-zA-Z][a-zA-Z0-9_-]*)\1\s*:\s*(["'])((?:\\\3|(?!\3).)*)\3\s*/g,
             expand:  /\$([a-zA-Z][a-zA-Z0-9_-]*)/g,
             header:  /^(?:\/\*[^!](?:[\r\n]|.)*?\*\/|(?:\/\/[^\r\n]*\r?\n)*)\r?\n/
@@ -106,9 +106,9 @@ Assuming we have the following source files, compromising a JavaScript library:
         root.foo = factory(root);
 }(this, function (root) {
     var foo = {};
-    include("foo-version.js", { minor: "99", micro: "42" })
-    include("foo-bar.js")
-    include("foo-baz.js")
+    include("foo-version.js", { minor: "99", micro: "42" });
+    include("foo-bar.js");
+    include("foo-baz.js");
     return foo;
 }));
 ```

@@ -33,9 +33,9 @@ module.exports = function (grunt) {
         "js": {
             /*  style:   valid JavaScript (JS)  */
             /*  header:  // foo  */
-            /*  include: include("foo", { bar: "quux", baz: "quux" })  */
+            /*  include: include("foo", { bar: "quux", baz: "quux" });  */
             /*  expand:  $bar  */
-            include: /([ \t]*)include\(\s*(["'])((?:\\\2|(?!\2).)+)\2\s*(?:,\s*(\{(?:[\r\n]|.)*?\}))?\s*\)([ \t]*(\r?\n)?)/g,
+            include: /([ \t]*)include\(\s*(["'])((?:\\\2|(?!\2).)+)\2\s*(?:,\s*(\{(?:[\r\n]|.)*?\}))?\s*\)\s*;?([ \t]*(\r?\n)?)/g,
             define:  /\s*(["']?)([a-zA-Z][a-zA-Z0-9_-]*)\1\s*:\s*(["'])((?:\\\3|(?!\3).)*)\3\s*/g,
             expand:  /\$([a-zA-Z][a-zA-Z0-9_-]*)/g,
             header:  /^(?:\/\*[^!](?:[\r\n]|.)*?\*\/|(?:\/\/[^\r\n]*\r?\n)*)\r?\n/
