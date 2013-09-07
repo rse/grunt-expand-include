@@ -67,7 +67,7 @@ module.exports = function (grunt) {
         });
         if (typeof options.directiveSyntax === "string") {
             if (typeof parsers[options.directiveSyntax] === "undefined")
-                throw "invalid pre-defined directive syntax \"" + options.directiveSyntax + "\".";
+                throw "Invalid pre-defined directive syntax \"" + options.directiveSyntax + "\".";
             options.directiveSyntax = parsers[options.directiveSyntax];
         }
         grunt.verbose.writeflags(options, "Options");
@@ -85,7 +85,7 @@ module.exports = function (grunt) {
                     else if (options.onUndefinedVariable === "empty")
                         txt = "";
                     else /* if (options.onUndefinedVariable === "error") */
-                        throw "variable \"" + name + "\" not defined.";
+                        throw "Variable \"" + name + "\" not defined.";
                 }
                 return txt;
             });
@@ -99,7 +99,7 @@ module.exports = function (grunt) {
                 if (!grunt.file.isPathAbsolute(file))
                     file = path.resolve(path.join(basedir, file));
                 if (!grunt.file.exists(file))
-                    throw "include file \"" + file + "\" not found.";
+                    throw "Include file \"" + file + "\" not found.";
                 var include_dir = path.dirname(file);
                 var txt = grunt.file.read(file);
 
@@ -142,7 +142,7 @@ module.exports = function (grunt) {
             try {
                 f.src.forEach(function (src) {
                     if (!grunt.file.exists(src))
-                        throw "source file \"" + src + "\" not found.";
+                        throw "Source file \"" + src + "\" not found.";
                     else {
                         /*  read, expand and post-adjust source  */
                         var txt = grunt.file.read(src);
@@ -154,7 +154,7 @@ module.exports = function (grunt) {
                         if (grunt.file.isDir(dest))
                             dest = path.join(dest, path.basename(src));
                         grunt.file.write(dest, txt);
-                        grunt.log.ok("destination file \"" + dest + "\" created.");
+                        grunt.log.writeln("File \"" + dest + "\" created.");
                     }
                 });
             }
