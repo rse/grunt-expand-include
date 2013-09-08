@@ -34,7 +34,7 @@ grunt.loadNpmTasks("grunt-expand-include");
 
 ## Task Options
 
-- `directiveSyntax`: (default `js`) either the name of a pre-defined directive syntax (`js` or `xml`)
+- `directiveSyntax`: (default `js`) either the name of a pre-defined directive syntax (`js`, `css` or `xml`)
    or alternatively defining a new syntax from scratch. The pre-defined syntax are:
 
        ```js
@@ -43,29 +43,61 @@ grunt.loadNpmTasks("grunt-expand-include");
             /*  header:  // foo  */
             /*  include: include("foo", { bar: "quux", baz: "quux" });  */
             /*  expand:  $bar  */
+            /*  adjust:  require("quux")  */
             include: /([ \t]*)include\(\s*(["'])((?:\\\2|(?!\2).)+)\2\s*(?:,\s*(\{(?:[\r\n]|.)*?\}))?\s*\)\s*;?([ \t]*(\r?\n)?)/g,
             define:  /\s*(["']?)([a-zA-Z][a-zA-Z0-9_-]*)\1\s*:\s*(["'])((?:\\\3|(?!\3).)*)\3\s*/g,
             expand:  /\$([a-zA-Z][a-zA-Z0-9_-]*)/g,
-            header:  /^(?:\/\*[^!](?:[\r\n]|.)*?\*\/|(?:\/\/[^\r\n]*\r?\n)*)\r?\n/
+            header:  /^(?:\/\*[^!](?:[\r\n]|.)*?\*\/|(?:\/\/[^\r\n]*\r?\n)*)\r?\n/,
+            adjust:  /(\brequire\((["']))((?:\\\2|(?!\2).)+)(\2\))/g
+       }
+       directiveSyntax: {
+            /*  style:   valid Cascading Style Sheets (CSS)  */
+            /*  header:  // foo  */
+            /*  include: @import "foo";  */
+            /*  expand:  @bar  */
+            /*  adjust:  url("quux")  */
+            include: /([ \t]*)include\(\s*(["'])((?:\\\2|(?!\2).)+)\2\s*(?:,\s*(\{(?:[\r\n]|.)*?\}))?\s*\)\s*;?([ \t]*(\r?\n)?)/g,
+            define:  /\s*(["']?)([a-zA-Z][a-zA-Z0-9_-]*)\1\s*:\s*(["'])((?:\\\3|(?!\3).)*)\3\s*/g,
+            expand:  /\$([a-zA-Z][a-zA-Z0-9_-]*)/g,
+            header:  /^(?:\/\*[^!](?:[\r\n]|.)*?\*\/|(?:\/\/[^\r\n]*\r?\n)*)\r?\n/,
+            adjust:  /(\burl\((["']))((?:\\\2|(?!\2).)+)(\2\))/g
        }
        directiveSyntax: {
             /*  style:   valid eXtensible Markup Language (XML)  */
             /*  header:  <!-- foo -->  */
             /*  include: <include file="foo" bar="quux" baz="quux"/>  */
             /*  expand:  &bar;  */
+            /*  adjust:  href="quux" or src="quux"  */
             include: /([ \t]*)<include\s+file=(["'])((?:\\\2|(?!\2).)+)\2((?:\s*[a-zA-Z][a-zA-Z0-9_-]*=(["'])(?:\\\5|(?!\5).)*\5)*)\s*\/>([ \t]*(\r?\n)?)/g,
             define:  /\s*()([a-zA-Z][a-zA-Z0-9_-]*)=(["'])((?:\\\3|(?!\3).)*)\3\s*/g,
             expand:  /\&([a-zA-Z][a-zA-Z0-9_-]*);/g,
-            header:  /^<!--[^!](?:[\r\n]|.)*?-->\r?\n/
+            header:  /^<!--[^!](?:[\r\n]|.)*?-->\r?\n/,
+            adjust:  /(\s(?:href|src)=(["']))((?:\\\2|(?!\2).)+)(\2)/g
        }
        ```
+
+  ATTENTION: when providing an own `directiveSyntax` for parsing other
+  languages, ensure that you are providing the same number of capturing
+  groups and in the same order. The underlying implementation depends on
+  them for processing the parsed input snippets!
+
+- `expandIncludes`: (default `true`) whether to expand the `directiveSyntax.include`
+  directives (a primary functionality of this plugin).
+
+- `expandDefines`: (default `true`) whether to expand the `directiveSyntax.expand`
+  directives (a secondary functionality of this plugin). Disable in case
+  this expansion functionality causes trouble to you.
+
+- `adjustReferences`: (default `true`) whether to expand the `directiveSyntax.adjust`
+  directives (a secondary functionality of this plugin). Disable in case
+  this expansion functionality causes trouble to you.
 
 - `onUndefinedVariable`: (default `keep`) action in case of a variable expansion where
   the variable is not defined: `keep` for keeping the directive as-is, `empty` for
   replacing the directive with an empty string or `error` to bail out.
 
 - `stripHeaderOfInclude`: (default `true`) whether to strip the initial header comment
-   (see `directiveSyntax.header`) of include files.
+  (see `directiveSyntax.header`) of include files.
 
 - `keepWhitespaceProlog`: (default `false`) whether to keep the whitespace prolog
   (see capture group 1 of `directiveSyntax.include`).
