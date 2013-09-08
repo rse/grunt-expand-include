@@ -219,8 +219,8 @@ module.exports = function (grunt) {
                         var txt = grunt.file.read(src);
                         txt = expandText(
                             path.resolve(path.dirname(dest)),
-                            path.resolve(path.dirname(src)), 
-                            path.basename(src), 
+                            path.resolve(path.dirname(src)),
+                            path.basename(src),
                             options.globalDefines,
                             txt
                         );
