@@ -169,7 +169,7 @@ foo.baz = function () {
 
 Assuming we have the following build environment:
 
-- `Grundfile.js`:
+- `Gruntfile.js`:
 
 ```js
 // [...]
