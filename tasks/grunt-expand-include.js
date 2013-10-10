@@ -25,7 +25,8 @@
 /* global module:  false */
 /* global require: false */
 
-var path = require("path");
+var path  = require("path");
+var chalk = require("chalk");
 
 module.exports = function (grunt) {
     /*  pre-define parsers  */
@@ -208,7 +209,7 @@ module.exports = function (grunt) {
             try {
                 f.src.forEach(function (src) {
                     if (!grunt.file.exists(src))
-                        throw "Source file \"" + src + "\" not found.";
+                        throw "Source file \"" + chalk.red(src) + "\" not found.";
                     else {
                         /*  determine destination path  */
                         var dest = f.dest;
@@ -228,7 +229,7 @@ module.exports = function (grunt) {
 
                         /*  write destination  */
                         grunt.file.write(dest, txt);
-                        grunt.log.writeln("File \"" + dest + "\" created.");
+                        grunt.log.writeln("File \"" + chalk.green(dest) + "\" created.");
                     }
                 });
             }
