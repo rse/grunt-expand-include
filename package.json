@@ -2,7 +2,7 @@
     "name":        "grunt-expand-include",
     "homepage":    "http://github.com/rse/grunt-expand-include",
     "description": "Grunt Task for Expanding Include Directives",
-    "version":     "0.9.7",
+    "version":     "0.9.8",
     "license":     "MIT",
     "author": {
         "name":    "Ralf S. Engelschall",
